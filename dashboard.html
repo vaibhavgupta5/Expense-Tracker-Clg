@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Dashboard</title>
+    <link id="theme-stylesheet" rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="profile">
+        <img
+          src="https://avatars.githubusercontent.com/u/109146556?v=4"
+          alt="Profile"
+          class="profile-image"
+        />
+        <span class="notification-dot"></span>
+        <h2 class="profile-name" id="profile-name">John Cooper</h2>
+        <p class="profile-email" id="profile-email">john@email.com</p>
+      </div>
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item active">Dashboard</li>
+          <li class="nav-item" id="expenses-btn">Add Expenses</li>
+          <a
+          style="text-decoration: none; color: #6c757d"
+          href="/expenses.html"
+          >
+          <li class="nav-item">
+           History
+          </li></a>
+          <li class="nav-item" id="switch-theme-btn">Switch Theme</li>
+          <a
+            style="text-decoration: none"
+            href="https://www.google.com"
+            target="_blank"
+          >
+            <li class="nav-item">Source Code</li>
+            </a>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Dashboard</h1>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-placeholder"></div>
+      </div>
+
+      <div class="chart-container">
+        <h3>Latest 3 Expenses</h3>
+        <table class="expenses-table">
+          <thead>
+            <tr>
+              <th>Transaction date</th>
+              <th>Amount</th>
+              <th>Category</th>
+            </tr>
+          </thead>
+          <tbody id="expenses-tbody">
+            <!-- Table rows will be dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <aside class="right-sidebar">
+      <div class="expense-track">
+        <!-- Expense items will be dynamically inserted here -->
+      </div>
+    </aside>
+
+    <div class="popup" id="expense-popup">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h2 class="popup-title">Add Expense</h2>
+          <button class="close-btn" id="close-popup">&times;</button>
+        </div>
+        <form id="expense-form">
+          <div class="form-group">
+            <label for="expense-amount">Amount</label>
+            <input type="number" id="expense-amount" required />
+          </div>
+          <div class="form-group">
+            <label for="expense-category">Category</label>
+            <select id="expense-category" required>
+              <option value="food">Food and grocery</option>
+              <option value="shopping">Shopping</option>
+              <option value="rent">House Rent</option>
+              <option value="commute">Commute</option>
+              <option value="emi">EMI</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="expense-date">Date</label>
+            <input type="date" max="{Date.now()}" id="expense-date" required />
+          </div>
+          <button type="submit" class="submit-btn">Add Expense</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>

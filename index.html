@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Financial Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #1a1d21;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #212529;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #2a2d31;
+            background-color: #1a1d21;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff9f43;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #ff9f43;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f39c12;
+        }
+
+        .error {
+            color: #ff4757;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login to Dashboard</h1>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required />
+                <span class="error" id="name-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required />
+                <span class="error" id="email-error"></span>
+            </div>
+            <button type="submit">Enter Dashboard</button>
+        </form>
+    </div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const userData = localStorage.getItem("user");
+            if (userData) {
+                window.location.href = "dashboard.html";
+            }
+        });
+
+        // Handle form submission
+        const form = document.getElementById("login-form");
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const nameError = document.getElementById("name-error");
+            const emailError = document.getElementById("email-error");
+
+            nameError.textContent = "";
+            emailError.textContent = "";
+
+            let valid = true;
+
+            if (!name) {
+                nameError.textContent = "Name is required.";
+                valid = false;
+            }
+
+            // Validate email
+            if (!email) {
+                emailError.textContent = "Email is required.";
+                valid = false;
+            } else if (!/^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,7}$/.test(email)) {
+                emailError.textContent = "Invalid email address.";
+                valid = false;
+            }
+
+            if (valid) {
+                // Save to localStorage
+                const user = { name, email };
+                localStorage.setItem("user", JSON.stringify(user));
+
+                // Redirect to dashboard
+                window.location.href = "dashboard.html";
+            }
+        });
+    </script>
+</body>
+</html>
